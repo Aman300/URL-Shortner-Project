@@ -45,12 +45,12 @@ let createShortUrl = async (req, res) => {
       return res.status(400).send({ status: false, message: "long url is missing" })
 
     } else if (!validUrl.isWebUri(data.longUrl)) {
-      return res.status(400).send({ status: false, message: "please enter a valid long url" })
+      return res.status(401).send({ status: false, message: "please enter a valid long url" })
 
-    } else if (!/^(?:http(s)?:\/\/)?[\w.-]+(?:\.[\w\.-]+)+[\w\-\._~:/?#[\]@!\$&'\(\)\*\+,;=.]+$/.test(data.longUrl)) {
-      return res.status(400).send({ status: false, message: "please enter a valid long url" })
+     } //else if (!/^(?:http(s)?:\/\/)?[\w.-]+(?:\.[\w\.-]+)+[\w\-\._~:/?#[\]@!\$&'\(\)\*\+,;=.]+$/.test(data.longUrl)) {
+    //   return res.status(401).send({ status: false, message: "please enter a valid long url" })
 
-    }
+    // }
 
     let cahcedUrlData = await GET_ASYNC(`${data.longUrl}`)
 
@@ -111,3 +111,5 @@ let getUrl = async (req, res) => {
 
 
 module.exports = { createShortUrl, getUrl }
+
+
