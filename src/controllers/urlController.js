@@ -47,17 +47,14 @@ let createShortUrl = async (req, res) => {
     } else if (!validUrl.isWebUri(data.longUrl)) {
       return res.status(401).send({ status: false, message: "please enter a valid long url" })
 
-     } //else if (!/^(?:http(s)?:\/\/)?[\w.-]+(?:\.[\w\.-]+)+[\w\-\._~:/?#[\]@!\$&'\(\)\*\+,;=.]+$/.test(data.longUrl)) {
-    //   return res.status(401).send({ status: false, message: "please enter a valid long url" })
-
-    // }
+     } 
 
     let cahcedUrlData = await GET_ASYNC(`${data.longUrl}`)
 
     let URL = JSON.parse(cahcedUrlData);
 
     if (cahcedUrlData) {
-      return res.status(200).send({ status: true, message: "redis return", data: URL })
+      return res.status(302).send({ status: true, message: "redis return", data: URL })
 
     }
 
